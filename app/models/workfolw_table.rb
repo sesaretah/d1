@@ -1,0 +1,2 @@
+class WorkfolwTable < ApplicationRecord
+end
