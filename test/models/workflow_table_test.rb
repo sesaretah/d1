@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class WorkfolwTableTest < ActiveSupport::TestCase
+class WorkflowTableTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -1,2 +1,0 @@
-class WorkfolwTable < ApplicationRecord
-end

@@ -1,4 +1,6 @@
 class Workflow < ApplicationRecord
+  has_many :workflow_tables, dependent: :destroy
+  has_many :auxiliary_table, through: :workflow_tables
 
   def nodes
     @nodes = self.graph['nodes']
@@ -18,7 +20,7 @@ class Workflow < ApplicationRecord
     self.graph['edges'].each do |edge|
       source =  find_node_index(nodes, edge['source']['id'])
       target =  find_node_index(nodes, edge['target']['id'])
-      result << [source, target] 
+      result << [source, target]
     end
     return result
   end
