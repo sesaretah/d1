@@ -53,4 +53,24 @@
     return results
   end
 
+  def self.find_by_key(key)
+    for auxiliary_table in AuxiliaryTable.all
+      for format in auxiliary_table.data_format
+        if format['field_id'] == key
+          return auxiliary_table
+        end
+      end
+    end
+  end
+
+  def self.find_title(field_id)
+    for auxiliary_table in AuxiliaryTable.all
+      for format in auxiliary_table.data_format
+        if format['field_id'] == field_id
+          return format['field_name']
+        end
+      end
+    end
+  end
+
 end
