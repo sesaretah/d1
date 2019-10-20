@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_26_130201) do
+ActiveRecord::Schema.define(version: 2019_10_16_075636) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,22 @@ ActiveRecord::Schema.define(version: 2019_09_26_130201) do
     t.string "name"
     t.string "surename"
     t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "title"
+    t.text "detail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "workflow_states", force: :cascade do |t|
+    t.string "title"
+    t.integer "workflow_id"
+    t.integer "node_id"
+    t.json "node_attr"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

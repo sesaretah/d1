@@ -1,12 +1,12 @@
 class V1::DocumentsController < ApplicationController
   def index
     documents = Document.all
-    render json: { data: Document.records(documents), klass: 'Document'  }, status: :ok
+    render json: { data: ActiveModel::SerializableResource.new(documents,  each_serializer: DocumentSerializer ).as_json, klass: 'Document' }, status: :ok
   end
 
   def show
     @document = Document.find(params[:id])
-    render json: { data: @document.record, klass: 'Document' }, status: :ok
+    render json: { data: DocumentSerializer.new(@document).as_json, klass: 'Document' }, status: :ok
   end
 
   def create

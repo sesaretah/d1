@@ -1,6 +1,6 @@
 class V1::AuxiliaryTablesController < ApplicationController
   def index
-    auxiliary_tables = AuxiliaryTable.all
+    auxiliary_tables = AuxiliaryTable.all.order(:title)
     render json: { data: auxiliary_tables, klass: 'AuxiliaryTable' }, status: :ok
   end
 

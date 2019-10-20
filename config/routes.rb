@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     get '/auxiliary_records/delete', to: 'auxiliary_records#delete'
     get '/auxiliary_tables/multiple', to: 'auxiliary_tables#multiple'
     get '/workflow_tables/delete', to: 'workflow_tables#delete'
+
+    resources :roles
     resources :documents
     resources :workflows
     resources :auxiliary_tables
