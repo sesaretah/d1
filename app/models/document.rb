@@ -1,6 +1,11 @@
 class Document < ApplicationRecord
   has_many :auxiliary_records
+  belongs_to :workflow_state, optional: true
   accepts_nested_attributes_for :auxiliary_records
+
+  def workflow
+    self.workflow_state.workflow if self.workflow_state
+  end
 
   def auxiliaries
     #result = self.as_json

@@ -6,6 +6,16 @@ class Workflow < ApplicationRecord
 
   after_save :extract_workflow_states
 
+
+  def start_states
+    states = []
+    for workflow_state in self.workflow_states
+      states << workflow_state if workflow_state.start_point
+    end
+    return states
+  end
+
+
   def nodes
     @nodes = self.graph['nodes']
   end

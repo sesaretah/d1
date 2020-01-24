@@ -1,5 +1,5 @@
 class RoleSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :title
+  attributes :id, :title, :assignments
 
 end

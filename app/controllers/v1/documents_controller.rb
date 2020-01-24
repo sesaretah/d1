@@ -12,15 +12,16 @@ class V1::DocumentsController < ApplicationController
   def create
     @document = Document.new(document_params)
     if @document.save
-      AuxiliaryRecord.batch_build(params[:auxiliary_records], @document.id)
+      AuxiliaryRecord.batch_save(params[:auxiliary_records], @document.id)
     end
-    render json: { data: @document.record, klass: 'Document' }, status: :ok
+    render json: { data: DocumentSerializer.new(@document).as_json, klass: 'Document' }, status: :ok
   end
 
   def update
     @document = Document.find(params[:id])
     if @document.update_attributes(document_params)
-      render json: { data: @document, klass: 'Document' }, status: :ok
+      AuxiliaryRecord.batch_save(params[:auxiliary_records], @document.id)
+      render json: { data: DocumentSerializer.new(@document).as_json, klass: 'Document' }, status: :ok
     else
       render json: { data: @document.errors.full_messages  }, status: :ok
     end

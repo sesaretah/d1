@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_16_075636) do
+ActiveRecord::Schema.define(version: 2019_11_05_090505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assignments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+    t.integer "assigner_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "auxiliary_records", force: :cascade do |t|
     t.integer "auxiliary_table_id"
@@ -40,6 +48,7 @@ ActiveRecord::Schema.define(version: 2019_10_16_075636) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.json "draft"
+    t.integer "workflow_state_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -55,6 +64,19 @@ ActiveRecord::Schema.define(version: 2019_10_16_075636) do
     t.text "detail"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "username"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "workflow_states", force: :cascade do |t|
